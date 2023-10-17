@@ -63,7 +63,7 @@ typedef struct liststr
  * @fname: filename
  * @env: linked list local copy of environment
  * @environ: custom modified copy of environ from LL env
- * @hiatory: the history node
+ * @history: the history node
  * @alias: the alias node
  * @env_changed: on if environ was changed
  * @status: the return status of the last exec'd command
@@ -102,7 +102,7 @@ NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
 
 /**
- * struct bultin - contains a builtin string and related 
+ * struct builtin - contains a builtin string and related 
  * function
  * @type: the builtin command flag
  * @funct: the function
