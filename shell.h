@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <sys/stat.h>
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -35,10 +34,10 @@
 #define HIST_FILE  ".simple_shell_history"
 #define HIST_MAX 4096
 
-extern char**environ;
+extern char **environ;
 
 /**
- * strut liststr - singly linked list
+ * struct liststr - singly linked list
  * @num: the number field
  * @str: a string
  * @next: points to the next node
@@ -48,11 +47,11 @@ typedef struct liststr
 	int num;
 	char *str;
 	struct liststr *next;
-}list_t;
+} list_t;
 
 /**
- * struct passinfo - contains pseduo-arguments to 
- * pass into a function, allowing uniform prototype for 
+ * struct passinfo - contains pseduo-arguments to
+ * pass into a function, allowing uniform prototype for
  * function pointer struct
  * @arg: a string generated from getline containing arguments
  * @argv: an array of string generated from arg
@@ -68,7 +67,7 @@ typedef struct liststr
  * @env_changed: on if environ was changed
  * @status: the return status of the last exec'd command
  * @cmd_buf: address of pointer to cmd_buf, on if chaining
- * @cmd_buf_type: CMD_type ||, &&,;
+ * @cmd_buf_type: CMD_type ||, &&, ;
  * @readfd: the fd from which to read line input
  * @histcount: the history line number count
  */
@@ -89,12 +88,12 @@ typedef struct passinfo
 	int env_changed;
 	int status;
 
-	char **cmd_buf;/*pointer to cmd ; char buffer,
-	for memory management */
+	char **cmd_buf;/* pointer to cmd ; chain buffer
+for memory management */
 	int cmd_buf_type;/* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
-}info_t;
+} info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL,
@@ -102,26 +101,26 @@ NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
 
 /**
- * struct builtin - contains a builtin string and related 
+ * struct builtin - contains a builtin string and related
  * function
  * @type: the builtin command flag
- * @funct: the function
+ * @func: the function
  */
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t*);
-}builtin_table;
+	int (*func)(info_t *);
+} builtin_table;
 
 /* toem_shloop.c */
-int hsh(info_t *, char *);
+int hsh(info_t *, char **);
 int find_builin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
 
 /* toem_parser.c */
 int is_cmd(info_t *, char *);
-char *dup_chars(char *,int, int);
+char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 
 /* loophsh.c */
@@ -182,7 +181,7 @@ int _myhistory(info_t *);
 int _myalias(info_t *);
 
 /* toem_getline.c */
-ssize_t get_input(info_t*);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **);
 void sigintHandler(int);
 

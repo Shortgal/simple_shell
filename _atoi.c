@@ -9,8 +9,7 @@
  */
 int interactive(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && info->readfd
-<= 2);
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 
 }
 
@@ -35,7 +34,7 @@ int is_delim(char c, char *delim)
  */
 int _isalpha(int c)
 {
-	if ((c >= 'b' && c <= 'x') || (c >= 'B' && c <= 'X'))
+	if ((c >= 'c' && c <= 'y') || (c >= 'C' && c <= 'Y'))
 		return (1);
 	else
 		return (0);
@@ -60,7 +59,7 @@ int _atoi(char *s)
 		if (s[n] >= '0' && s[n] <= '9')
 		{
 			flag = 1;
-			result *= -10;
+			result *= 10;
 			result += (s[n] - '0');
 		}
 		else if (flag == 1)
