@@ -41,6 +41,28 @@ int _eputchar(char c)
 }
 
 /**
+ * _putfd - writes the character c to given fd
+ * @c: The character to print
+ * @fd: The filedescriptor to write to
+ *
+ * Return: on success 1, and -1 on error
+ */
+int _putfd(char c, int fd)
+{
+	static int j;
+	static char buf[WRITE_BUF_SIZE];
+
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	{
+		write(fd, buf, j);
+		j = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[j++] = c;
+	return (1);
+}
+
+/**
  * _putsfd - prints an input string
  * @str: the string to be printed
  * @fd: the filedescriptor to write to
@@ -57,7 +79,6 @@ int _putsfd(char *str, int fd)
 	{
 		j += _putfd(*str++, fd);
 	}
-	return (j)
+	return (j);
+
 }
-
-
